@@ -1,6 +1,9 @@
 Ansible role: mpd
 =========
 
+[![MIT licensed][mit-badge]][mit-link]
+[![Galaxy Role][role-badge]][galaxy-link]
+
 Cross-platform ansible role for installation of MPD, MPC and NCMPCPP on MacOS and Linux Systems
 
 Requirements
