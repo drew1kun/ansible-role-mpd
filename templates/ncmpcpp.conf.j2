@@ -1,0 +1,50 @@
+#=============================== MPD =================================
+mpd_music_dir = "{{ mpd_music_dir }}"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "5"
+mpd_host = "{{ mpd_ncmpcpp_mpd_host }}"
+mpd_port = "{{ mpd_port }}"
+#=====================================================================
+
+#============================= Behavior ==============================
+allow_for_physical_item_deletion = "yes"
+autocenter_mode = "yes"
+incremental_seeking = "yes"
+playlist_disable_highlight_delay = "0"
+playlist_display_mode = "columns" (classic/columns)
+browser_display_mode = "columns"
+header_visibility = "yes"
+statusbar_visibility = "yes"
+#=====================================================================
+
+#============================= Lyrics ================================
+follow_now_playing_lyrics = "yes"
+ignore_leading_the = "yes"
+song_list_format = "$1 %n │ $5%a$1 │ $8%t $7(%l)$1 $R$6%b $7(%y)$1 $9"
+#=====================================================================
+
+#=========================== Appearence ==============================
+song_columns_list_format = " (7)[yellow]{nE} (7)[blue]{l} (30)[green]{t} (30)[magenta]{a} (20)[cyan]{b} (4)[white]{yE}"
+colors_enabled = "yes"
+main_window_color = "blue"
+header_window_color = "cyan"
+volume_color = "red"
+progressbar_color = "cyan"
+statusbar_color = "yellow"
+color1 = "cyan"
+color2 = "magenta"
+active_window_border = "blue"
+progressbar_look = "─░─"
+user_interface = "alternative" (classic/alternative)
+display_volume_level = "yes"
+#=====================================================================
+
+#=========================== Visualizer ==============================
+visualizer_in_stereo = "yes"
+visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_output_name = "FIFO"
+visualizer_sync_interval = "30"
+visualizer_type = "spectrum" (spectrum/wave)
+visualizer_look = "••"
+visualizer_color = "magenta"
+#=====================================================================

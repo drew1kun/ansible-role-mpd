@@ -1,0 +1,63 @@
+---
+#========================== INSTALL RELATED ============================
+mpd_firewall_zones: [ 'public' ]
+#=======================================================================
+
+#=========================== CONFIG RELATED ============================
+# music directory can also be nfs share if mpd built --with-libnfs
+#   mpd_music_dir: nfs://192.168.1.1/music
+mpd_music_dir: /var/lib/mpd/music
+mpd_playlist_dir: /var/lib/mpd/playlists
+
+mpd_db_file: /var/lib/mpd/mpd.db
+mpd_sticker_file: /var/lib/mpd/sticker.db
+mpd_log_file: syslog
+mpd_state_file: /var/lib/mpd/mpdstate
+
+mpd_user: mpd
+
+mpd_outputs:
+# NO OUTPUT
+  - name: "Null Output"
+    type: "null"
+
+# ALSA DRIVER
+# Install driver:
+#   apt-get install alsa-utils
+  - name: "My ALSA Device"
+    type: "alsa"
+    device: "hw:0,0"            # optional
+    format: "44100:16:2"        # optional
+    mixer_device: "default"     # optional
+    mixer_control: "PCM"        # optional
+    mixer_index: "0"            # optional
+
+# PULSEAUDIO DRIVER
+# Does not work well on Raspberry Pi 3 for some reason
+# https://raspberrypi.stackexchange.com/questions/12339/pulseaudio-mpd-http-streaming-installation-guide
+# Install driver:
+#   apt-get install pulseaudio
+# Optional packages:
+#     - pulseaudio-module-zeroconf
+#     - mpg321
+#     - lame
+#     - mplayer
+#     - pavucontrol
+#     - paprefs
+#
+#  - name: "MPD PulseAudio Output"
+#    type: "pulse"
+#    server: "remote_server"     # optional
+#    sink: "remote_server_sink"  # optional
+
+# HTTP STREAM
+# Install codec: apt-get install lame
+  - name: "My HTTP Stream"
+    type: "httpd"
+    encoder: "lame"
+    port: "8000"
+    quality: "5.0"    # IMPORTANT: Specify EITHER 'quality' OR 'bitrate' - NEVER both!
+    # bitrate: "128"
+    format: "44100:16:1"
+#=======================================================================
+...

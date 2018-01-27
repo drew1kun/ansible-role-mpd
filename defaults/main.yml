@@ -1,0 +1,30 @@
+---
+# defaults file for mpd
+
+mpd_autostart: true
+
+mpd_install_mpc: true
+
+mpd_install_ncmpcpp: true
+
+mpd_ncmpcpp_users:
+  - "{{ ansible_user_id }}"
+  - root
+  - drew
+
+mpd_ncmpcpp_mpd_host: localhost
+
+# ATTENTION!
+# OS-Specific variables can be found in vars/ directory of this role
+#
+#================= OS AGNOSTIC MPD CONFIG VARIABLES ====================
+mpd_port: 6600
+mpd_bind_to_address: any
+
+mpd_name: Music Player Daemon
+mpd_restore_paused: yes
+mpd_auto_update: yes
+mpd_follow_inside_symlinks: yes
+mpd_follow_outside_symlinks: no
+#=======================================================================
+...

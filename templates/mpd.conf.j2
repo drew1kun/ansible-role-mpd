@@ -1,0 +1,41 @@
+music_directory         "{{ mpd_music_dir }}"
+playlist_directory      "{{ mpd_playlist_dir }}"
+
+db_file                 "{{ mpd_db_file }}"
+sticker_file            "{{ mpd_sticker_file }}"
+log_file                "{{ mpd_log_file }}"
+{% if ansible_os_family == 'Darwin' %}
+pid_file                "{{ mpd_pid_file }}"
+{% endif %}
+state_file              "{{ mpd_state_file }}"
+
+user                    "{{ mpd_user }}"
+bind_to_address         "{{ mpd_bind_to_address }}"
+port                    "{{ mpd_port }}"
+
+restore_paused          "{% if mpd_restore_paused %}yes{% else %}no{% endif %}"
+auto_update             "{% if mpd_auto_update %}yes{% else %}no{% endif %}"
+follow_inside_symlinks  "{% if mpd_follow_inside_symlinks %}yes{% else %}no{% endif %}"
+follow_outside_symlinks "{% if mpd_follow_outside_symlinks %}yes{% else %}no{% endif %}"
+
+zeroconf_enabled        "yes"
+zeroconf_name           "{{ mpd_name }}"
+
+input {
+    plugin "curl"
+    verify_peer "yes"
+    verify_host "yes"
+}
+
+decoder {
+    plugin              "mp4ff"
+#    enabled             "no"
+}
+
+{% for output in mpd_outputs %}
+audio_output {
+{% for k, v in output.iteritems() %}
+    {{ k }} "{{ v }}"
+{% endfor %}
+}
+{% endfor %}
