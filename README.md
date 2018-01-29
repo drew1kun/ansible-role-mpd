@@ -89,7 +89,7 @@ License
 Author Information
 ------------------
 
-![Andrew Shagayev](drewshg@gmail.com)
+Andrew Shagayev
 
 [role-badge]: https://img.shields.io/badge/role-drew--kun.mpd-green.svg
 [galaxy-link]: https://galaxy.ansible.com/drew-kun/mpd/
