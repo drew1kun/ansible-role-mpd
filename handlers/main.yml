@@ -7,12 +7,10 @@
     state: restarted
     enabled: yes
   when: mpd_autostart
-  tags:
-    - mpd
+  become: yes
 
 - name: Restart mpd service with brew services command
   command: /usr/local/bin/brew services restart mpd
   when: mpd_autostart
-  tags:
-    - mpd
+  become: no
 ...
