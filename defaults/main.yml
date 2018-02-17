@@ -8,9 +8,8 @@ mpd_install_mpc: true
 mpd_install_ncmpcpp: true
 
 mpd_ncmpcpp_users:
-  - "{{ ansible_user_id }}"
-  - root
   - drew
+  - root
 
 mpd_ncmpcpp_mpd_host: localhost
 
