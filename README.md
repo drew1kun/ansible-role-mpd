@@ -53,29 +53,28 @@ OS-Specific (Mac and Linux):
 
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| mpd_music_dir | MPD music directory (set in mpd.conf) | Darwin: `/Volumes/music`; Debian: `/var/lib/mpd/music` |
-| mpd_playlist_dir | Playlist directory (set in mpd.conf) | Darwin: `/Volumes/music/playlists`; Debian:
-`/var/lib/mpd/playlists` |
-| mpd_db_file | MPD database file (set in mpd.conf) | Darwin: `~/.mpd/mpd.db`; Debian: `/var/lib/mpd/mpd.db` |
-| mpd_sticker_file | sticker file (set in mpd.conf) | Darwin: `~/.mpd/sticker.db`; Debian: `/var/lib/mpd/sticker.db` |
-| mpd_log_file | log file (set in mpd.conf) | Darwin: `~/.mpd/mpd.log`; Debian: `syslog` |
-| mpd_pid_file | PID file (set in mpd.conf) | Darwin: `~/.mpd/mpd.pid`; Debian: |
-| mpd_state_file | state file (set in mpd.conf) | Darwin: `~/.mpd/mpdstate`; Debian: `/var/lib/mpd/mpdstate` |
-| mpd_user | mpd user (set in mpd.conf) | Darwin: `{{ ansible_user_id }}`; Debian: `mpd` |
-| mpd_outputs | list of output configurations for mpd.conf | Darwin: see *vars/Darwing.yml*; Debian: see *vars/Debian.yml* |
+| **mpd_music_dir** | MPD music directory (set in mpd.conf) | Darwin: `/Volumes/music`; Debian: `/var/lib/mpd/music` |
+| **mpd_playlist_dir** | Playlist directory (set in mpd.conf) | Darwin: `/Volumes/music/playlists`; Debian: `/var/lib/mpd/playlists` |
+| **mpd_db_file** | MPD database file (set in mpd.conf) | Darwin: `~/.mpd/mpd.db`; Debian: `/var/lib/mpd/mpd.db` |
+| **mpd_sticker_file** | sticker file (set in mpd.conf) | Darwin: `~/.mpd/sticker.db`; Debian: `/var/lib/mpd/sticker.db` |
+| **mpd_log_file** | log file (set in mpd.conf) | Darwin: `~/.mpd/mpd.log`; Debian: `syslog` |
+| **mpd_pid_file** | PID file (set in mpd.conf) | Darwin: `~/.mpd/mpd.pid`; Debian: None |
+| **mpd_state_file** | state file (set in mpd.conf) | Darwin: `~/.mpd/mpdstate`; Debian: `/var/lib/mpd/mpdstate` |
+| **mpd_user** | mpd user (set in mpd.conf) | Darwin: `{{ ansible_user_id }}`; Debian: `mpd` |
+| **mpd_outputs** | list of output configurations for mpd.conf | Darwin: see *vars/Darwing.yml*; Debian: see *vars/Debian.yml* |
 
 MacOS-Specific:
 
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| mpd_osx_install_options | List of homebrew installation options form MPD | see *vars/Darwing.yml* |
-| mpd_osx_ncmpcpp_install_options | List of homebrew installation options for NCMPCPP | see *vars/Darwing.yml* |
+| **mpd_osx_install_options** | List of homebrew installation options form MPD | see *vars/Darwing.yml* |
+| **mpd_osx_ncmpcpp_install_options** | List of homebrew installation options for NCMPCPP | see *vars/Darwing.yml* |
 
 Debian-Specific:
 
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| mpd_firewall_zones | Open MPD port only for the list of these firewalld zones | `[ public ]` |
+| **mpd_firewall_zones** | Open MPD port only for the list of these firewalld zones | `[ public ]` |
 
 Dependencies
 ------------
