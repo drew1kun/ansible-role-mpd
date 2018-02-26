@@ -36,18 +36,18 @@ OS-Agnostic:
 
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| mpd_autostart | start mpd automatically | `yes` |
-| mpd_install_mpc | install mpc cli client | `yes` |
-| mpd_install_ncmpcpp | Install ncmpcpp or not | `yes` |
-| mpd_ncmpcpp_users | list of ncmpcpp users | `[drew, root]` |
-| mpd_ncmpcpp_mpd_host | MPD host set in ncmpcpp configuration | `localhost` |
-| mpd_port | port mpd will run on | `6600` |
-| mpd_bind_to_address | IP address on which mpd will listen | `any` |
-| mpd_name | MPD name |`Music Player Daemon` |
-| mpd_restore_paused | | `yes` |
-| mpd_auto_update | | `yes` |
-| mpd_follow_inside_symlinks | | `yes` |
-| mpd_follow_outside_symlinks | | `no` |
+| **mpd_autostart** | Start mpd automatically | `yes` |
+| **mpd_install_mpc** | Install mpc cli client | `yes` |
+| **mpd_install_ncmpcpp** | Install ncmpcpp or not | `yes` |
+| **mpd_ncmpcpp_users** | List of ncmpcpp users | `[drew, root]` |
+| **mpd_ncmpcpp_mpd_host** | MPD host set in ncmpcpp configuration | `localhost` |
+| **mpd_port** | Port mpd will run on | `6600` |
+| **mpd_bind_to_address** | IP address on which mpd will listen | `any` |
+| **mpd_name** | MPD name |`Music Player Daemon` |
+| **mpd_restore_paused** | | `yes` |
+| **mpd_auto_update** | | `yes` |
+| **mpd_follow_inside_symlinks** | | `yes` |
+| **mpd_follow_outside_symlinks** | | `no` |
 
 OS-Specific (Mac and Linux):
 
