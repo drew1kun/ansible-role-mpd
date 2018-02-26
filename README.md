@@ -34,23 +34,27 @@ run the playbook with role specifying tags:
 
 OS-Agnostic:
 
-    mpd_autostart: yes | no                 # start mpd automatically
-    mpd_install_mpc: yes | no
-    mpd_install_ncmpcpp: yes | no           # Install ncmpcpp or not
-    mpd_ncmpcpp_users:                      # list of ncmpcpp users
-    mpd_port:                               # port mpd will run on
-    mpd_bind_to_address:                    # IP address on which mpd will listen
-    mpd_name:                               # MPD name
-    mpd_restore_paused: yes | no            #
-    mpd_auto_update: yes | no               #
-    mpd_follow_inside_symlinks: yes | no    #
-    mpd_follow_outside_symlinks: yes | no   #
+| Variables | Description | Default|
+|-----------|-------------|--------|
+| mpd_autostart | start mpd automatically | `yes` |
+| mpd_install_mpc | install mpc cli client | `yes` |
+| mpd_install_ncmpcpp | Install ncmpcpp or not | `yes` |
+| mpd_ncmpcpp_users | list of ncmpcpp users | `[drew, root]` |
+| mpd_ncmpcpp_mpd_host | MPD host set in ncmpcpp configuration | `localhost` |
+| mpd_port | port mpd will run on | `6600` |
+| mpd_bind_to_address | IP address on which mpd will listen | `any` |
+| mpd_name | MPD name |`Music Player Daemon` |
+| mpd_restore_paused | | `yes` |
+| mpd_auto_update | | `yes` |
+| mpd_follow_inside_symlinks | | `yes` |
+| mpd_follow_outside_symlinks | | `no` |
 
 OS-Specific (Mac and Linux):
 
-    # Configuration related vars:
-    mpd_music_dir:                          # MPD music directory (set in mpd.conf)
-    mpd_playlist_dir:                       # Playlist directory (set in mpd.conf)
+| Variables | Description | Default|
+|-----------|-------------|--------|
+| mpd_music_dir | MPD music directory (set in mpd.conf) | Darwin: `/Volumes/music`; Debian: `/` |
+| mpd_playlist_dir:                       # Playlist directory (set in mpd.conf)
     mpd_db_file:                            # MPD database file (set in mpd.conf)
     mpd_sticker_file:                       # sticker file (set in mpd.conf)
     mpd_log_file:                           # log file (set in mpd.conf)
