@@ -39,7 +39,7 @@ OS-Agnostic:
 | **mpd_autostart** | Start mpd automatically | `yes` |
 | **mpd_install_mpc** | Install mpc cli client | `yes` |
 | **mpd_install_ncmpcpp** | Install ncmpcpp or not | `yes` |
-| **mpd_ncmpcpp_users** | List of ncmpcpp users | `[drew, root]` |
+| **mpd_ncmpcpp_users[]** | List of ncmpcpp users | `[drew, root]` |
 | **mpd_ncmpcpp_mpd_host** | MPD host set in ncmpcpp configuration | `localhost` |
 | **mpd_port** | Port mpd will run on | `6600` |
 | **mpd_bind_to_address** | IP address on which mpd will listen | `any` |
@@ -61,7 +61,7 @@ OS-Specific (Mac and Linux):
 | **mpd_pid_file** | PID file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpd.pid`</li><li>Debian: None</li></ul> |
 | **mpd_state_file** | state file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpdstate`</li><li>Debian: `/var/lib/mpd/mpdstate`</li></ul> |
 | **mpd_user** | mpd user (set in mpd.conf) | <ul><li>Darwin: `{{ ansible_user_id }}`</li><li>Debian: `mpd`</li></ul> |
-| **mpd_outputs** | list of output configurations for mpd.conf | <ul><li>Darwin: see [`vars/Darwin.yml`](vars/Darwin.yml)</li><li>Debian: see [`vars/Debian.yml`](vars/Debian.yml)</li></ul> |
+| **mpd_outputs[]** | list of output configurations for mpd.conf | <ul><li>Darwin: see [`vars/Darwin.yml`](vars/Darwin.yml)</li><li>Debian: see [`vars/Debian.yml`](vars/Debian.yml)</li></ul> |
 
 MacOS-Specific:
 
