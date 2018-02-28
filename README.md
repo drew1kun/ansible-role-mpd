@@ -67,8 +67,8 @@ MacOS-Specific:
 
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| **mpd_osx_install_options** | List of homebrew installation options form MPD | see [`vars/Darwin.yml`](vars/Darwin.yml) |
-| **mpd_osx_ncmpcpp_install_options** | List of homebrew installation options for NCMPCPP | see [`vars/Darwin.yml`](vars/Darwin.yml) |
+| **mpd_osx_install_options[]** | List of homebrew installation options form MPD | see [`vars/Darwin.yml`](vars/Darwin.yml) |
+| **mpd_osx_ncmpcpp_install_options[]** | List of homebrew installation options for NCMPCPP | see [`vars/Darwin.yml`](vars/Darwin.yml) |
 
 Debian-Specific:
 
