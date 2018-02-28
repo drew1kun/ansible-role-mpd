@@ -58,10 +58,10 @@ OS-Specific (Mac and Linux):
 | **mpd_db_file** | MPD database file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpd.db`</li><li>Debian: `/var/lib/mpd/mpd.db`</li></ul> |
 | **mpd_sticker_file** | sticker file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/sticker.db`</li><li>Debian: `/var/lib/mpd/sticker.db`</li></ul> |
 | **mpd_log_file** | log file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpd.log`</li><li>Debian: `syslog`</li></ul> |
-| **mpd_pid_file** | PID file (set in mpd.conf) | Darwin: `~/.mpd/mpd.pid`; Debian: None |
+| **mpd_pid_file** | PID file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpd.pid`</li><li>Debian: None</li></ul> |
 | **mpd_state_file** | state file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpdstate`</li><li>Debian: `/var/lib/mpd/mpdstate`</li></ul> |
 | **mpd_user** | mpd user (set in mpd.conf) | <ul><li>Darwin: `{{ ansible_user_id }}`</li><li>Debian: `mpd`</li></ul> |
-| **mpd_outputs** | list of output configurations for mpd.conf | Darwin: see *vars/Darwin.yml*; Debian: see *vars/Debian.yml* |
+| **mpd_outputs** | list of output configurations for mpd.conf | <ul><li>Darwin: see *vars/Darwin.yml*</li><li>Debian: see *vars/Debian.yml*</li></ul> |
 
 MacOS-Specific:
 
