@@ -61,14 +61,14 @@ OS-Specific (Mac and Linux):
 | **mpd_pid_file** | PID file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpd.pid`</li><li>Debian: None</li></ul> |
 | **mpd_state_file** | state file (set in mpd.conf) | <ul><li>Darwin: `~/.mpd/mpdstate`</li><li>Debian: `/var/lib/mpd/mpdstate`</li></ul> |
 | **mpd_user** | mpd user (set in mpd.conf) | <ul><li>Darwin: `{{ ansible_user_id }}`</li><li>Debian: `mpd`</li></ul> |
-| **mpd_outputs** | list of output configurations for mpd.conf | <ul><li>Darwin: see *vars/Darwin.yml*</li><li>Debian: see *vars/Debian.yml*</li></ul> |
+| **mpd_outputs** | list of output configurations for mpd.conf | <ul><li>Darwin: see [`vars/Darwin.yml`](vars/Darwin.yml)</li><li>Debian: see [`vars/Debian.yml`](vars/Debian.yml)</li></ul> |
 
 MacOS-Specific:
 
 | Variables | Description | Default|
 |-----------|-------------|--------|
-| **mpd_osx_install_options** | List of homebrew installation options form MPD | see *vars/Darwin.yml* |
-| **mpd_osx_ncmpcpp_install_options** | List of homebrew installation options for NCMPCPP | see *vars/Darwin.yml* |
+| **mpd_osx_install_options** | List of homebrew installation options form MPD | see [`vars/Darwin.yml`](vars/Darwin.yml) |
+| **mpd_osx_ncmpcpp_install_options** | List of homebrew installation options for NCMPCPP | see [`vars/Darwin.yml`](vars/Darwin.yml) |
 
 Debian-Specific:
 
