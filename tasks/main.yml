@@ -7,4 +7,6 @@
     - mpd
     - mpc
     - ncmpcpp
+
+- meta: flush_handlers
 ...
