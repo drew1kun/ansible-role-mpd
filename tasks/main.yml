@@ -9,4 +9,6 @@
     - ncmpcpp
 
 - meta: flush_handlers
+  tags:
+    - mpd
 ...
