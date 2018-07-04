@@ -18,12 +18,12 @@ One of the following OS (or deriviatives):
 For MacOS:
 if Homebrew is not installed on the managed host, install the following role via galaxy:
 
-    ansible-galaxy install drew-kun.homebrew
+    ansible-galaxy install drew_kun.homebrew
 
  And include it in the playbook:
 
     roles:
-        - drew-kun.homebrew
+        - drew_kun.homebrew
 
 Role Variables
 --------------
@@ -89,8 +89,8 @@ Example Playbook
     - hosts: dev_clients_macos
       gather_facts: yes
       roles:
-        - drew-kun.homebrew
-        - drew-kun.mpd
+        - drew_kun.homebrew
+        - drew_kun.mpd
 
 License
 -------
@@ -102,8 +102,8 @@ Author Information
 
 Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 
-[role-badge]: https://img.shields.io/badge/role-drew--kun.mpd-green.svg
-[galaxy-link]: https://galaxy.ansible.com/drew-kun/mpd/
+[role-badge]: https://img.shields.io/badge/role-drew__kun.mpd-green.svg
+[galaxy-link]: https://galaxy.ansible.com/drew_kun/mpd/
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[mit-link]: https://raw.githubusercontent.com/drew-kun/ansible-mpd/master/LICENSE
+[mit-link]: https://raw.githubusercontent.com/drew_kun/ansible-mpd/master/LICENSE
 [homebrew]: http://brew.sh/
