@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: mpd
   author: Andrew Shagayev
   description: This role installs and configures mpd, mpc and ncmpcpp
 
