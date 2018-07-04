@@ -21,9 +21,9 @@ galaxy_info:
     - mpd
     - mpc
     - ncmpcpp
-    - Debian
-    - MacOS
-    - OSX
+    - debian
+    - macos
+    - osx
 
 dependencies: []
 ...
