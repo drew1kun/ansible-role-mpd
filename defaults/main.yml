@@ -7,10 +7,6 @@ mpd_install_mpc: true
 
 mpd_install_ncmpcpp: true
 
-mpd_ncmpcpp_users:
-  - drew
-  - root
-
 mpd_ncmpcpp_mpd_host: localhost
 
 # ATTENTION!
@@ -26,4 +22,9 @@ mpd_auto_update: yes
 mpd_follow_inside_symlinks: yes
 mpd_follow_outside_symlinks: no
 #=======================================================================
+
+# Linux only:
+mpd_ncmpcpp_users:
+  - drew
+  - root
 ...

@@ -1,8 +1,7 @@
 ---
 - name: '[Debian] Include all Debian-specific variables'
   include_vars: Debian.yml
-  tags:
-    - mpd
+  tags: mpd
 
 # To do something only if some distro installed on the host
 # Even specific distro version can be specified, see:
@@ -17,8 +16,7 @@
   action: >
     {{ ansible_pkg_mgr }} name=mpd state=latest update_cache=yes
   become: yes
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Debian] Install mpc package'
   action: >
@@ -26,8 +24,8 @@
   become: yes
   when: mpd_install_mpc
   tags:
-    - mpd
-    - mpc
+  - mpd
+  - mpc
 
 - name: '[Debian] Install ncmpcpp package'
   action: >
@@ -35,8 +33,8 @@
   become: yes
   when: mpd_install_ncmpcpp
   tags:
-    - mpd
-    - ncmpcpp
+  - mpd
+  - ncmpcpp
 
 - name: '[Debian] Enable and Start mpd service if needed'
   service:
@@ -44,8 +42,7 @@
     enabled: "{{ mpd_autostart }}"
     state: "{% if mpd_autostart %}started{% else %}stopped{% endif %}"
   become: yes
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Debian] Enable mpd socket if needed'
   service:
@@ -53,15 +50,13 @@
     enabled: "{% if mpd_autostart %}no{% else %}yes{% endif %}"
     state: "{% if mpd_autostart %}stopped{% else %}started{% endif %}"
   become: yes
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Debian] Generate mpd.conf from template'
   template: src=mpd.conf.j2 dest=/etc/mpd.conf backup=yes owner=root group=root mode=0644
   notify: Restart mpd service
   become: yes
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
   file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="{{ item }}" mode=0755
@@ -69,12 +64,12 @@
   become_user: "{{ item }}"
   with_items: "{{ mpd_ncmpcpp_users }}"
   when:
-    - mpd_install_ncmpcpp
-    - mpd_ncmpcpp_users is defined
-    - mpd_ncmpcpp_users | length > 0
+  - mpd_install_ncmpcpp
+  - mpd_ncmpcpp_users is defined
+  - mpd_ncmpcpp_users | length > 0
   tags:
-    - mpd
-    - ncmpcpp
+  - mpd
+  - ncmpcpp
 
 - name: '[Debian] Generate ncmpcpp config from template'
   template: src=ncmpcpp.conf.j2 dest='~/.ncmpcpp/config' owner="{{ item }}" group="{{ item }}" mode=0644
@@ -82,28 +77,25 @@
   become_user: "{{ item }}"
   with_items: "{{ mpd_ncmpcpp_users }}"
   when:
-    - mpd_install_ncmpcpp
-    - mpd_ncmpcpp_users is defined
-    - mpd_ncmpcpp_users | length > 0
+  - mpd_install_ncmpcpp
+  - mpd_ncmpcpp_users is defined
+  - mpd_ncmpcpp_users | length > 0
   tags:
-    - mpd
-    - ncmpcpp
+  - mpd
+  - ncmpcpp
 
 - stat: path=/usr/sbin/firewalld
   register: mpd_stat_1_firewalld
-  tags:
-    - mpd
+  tags: mpd
 
 - stat: path=/sbin/firewalld
   register: mpd_stat_2_firewalld
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Debian] Open mpd port in firewall'
   firewalld: port="{{ mpd_port }}/tcp" zone="{{ item }}" permanent=true immediate=yes state=enabled
   with_items: "{{ mpd_firewall_zones }}"
   become: yes
   when: mpd_stat_1_firewalld.stat.exists or mpd_stat_2_firewalld.stat.exists
-  tags:
-    - mpd
+  tags: mpd
 ...

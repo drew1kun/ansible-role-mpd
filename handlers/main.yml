@@ -1,6 +1,7 @@
 ---
 # handlers file for mpd
 
+# Linux services:
 - name: Restart mpd service
   service:
     name: mpd
@@ -9,6 +10,9 @@
   when: mpd_autostart
   become: yes
 
+
+### MACOS
+# Brew services:
 - name: Restart mpd service with brew services command
   command: /usr/local/bin/brew services restart mpd
   when: mpd_autostart
