@@ -1,8 +1,7 @@
 ---
 - name: '[Darwin] Include OSX-Specific variables'
   include_vars: Darwin.yml
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Darwin] Install mpd with Homebrew'
   homebrew:
@@ -10,33 +9,32 @@
     name: mpd
     state: latest
     install_options: "{{ mpd_osx_install_options }}"
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Darwin] Install mpc with Homebrew'
   homebrew: name=mpc state=latest
   when: mpd_install_mpc
   tags:
-    - mpd
-    - mpc
+  - mpd
+  - mpc
 
 - name: '[Darwin] Install ncmpcpp with Homebrew'
   homebrew: name=ncmpcpp state=latest install_options={{ mpd_osx_ncmpcpp_install_options }}
   when: mpd_install_ncmpcpp
   tags:
-    - mpd
-    - ncmpcpp
+  - mpd
+  - ncmpcpp
 
 - stat: path=~/Library/LaunchAgents/homebrew.mxcl.mpd.plist
   register: mpd_stat_plist
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Darwin] Enable mpd service to start on login'
   command: /usr/local/bin/brew services start mpd
-  when: mpd_autostart and mpd_stat_plist.stat.exists == False
-  tags:
-    - mpd
+  when:
+  - mpd_autostart
+  - not mpd_stat_plist.stat.exists
+  tags: mpd
 
 - name: '[Darwin] Create ~/.mpd/ directory'
   file:
@@ -46,8 +44,7 @@
     group: staff
     mode: 0755
   become: no
-  tags:
-    - mpd
+  tags: mpd
 
 - name: '[Darwin] Generate mpd.conf from template'
   template:
@@ -58,7 +55,33 @@
     group: staff
     mode: 0644
   become: no
-  notify: Restart mpd service #with brew services command
+  notify: Restart mpd service with brew services command
+  tags: mpd
+
+- name: '[Debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
+  file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="staff" mode=0755
+  #file: path='~/.ncmpcpp' state=directory owner="{{ ansible_user_id }}" group="staff" mode=0755
+  become: yes
+  become_user: "{{ item }}"
+  with_items: "{{ mpd_ncmpcpp_users }}"
+  when:
+  - mpd_install_ncmpcpp
+  - mpd_ncmpcpp_users is defined
+  - mpd_ncmpcpp_users | length > 0
   tags:
-    - mpd
+  - mpd
+  - ncmpcpp
+
+- name: '[Debian] Generate ncmpcpp config from template'
+  template: src=ncmpcpp.conf.j2 dest='~/.ncmpcpp/config' owner="{{ item }}" group="staff" mode=0644
+  become: yes
+  become_user: "{{ item }}"
+  with_items: "{{ mpd_ncmpcpp_users }}"
+  when:
+  - mpd_install_ncmpcpp
+  - mpd_ncmpcpp_users is defined
+  - mpd_ncmpcpp_users | length > 0
+  tags:
+  - mpd
+  - ncmpcpp
 ...
