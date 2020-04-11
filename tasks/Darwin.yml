@@ -1,6 +1,6 @@
 ---
-- name: '[Darwin] Include OSX-Specific variables'
-  include_vars: Darwin.yml
+- name: '[Darwin] Import OSX-Specific variables'
+  import_vars: Darwin.yml
   tags: mpd
 
 - name: '[Darwin] Install mpd with Homebrew'

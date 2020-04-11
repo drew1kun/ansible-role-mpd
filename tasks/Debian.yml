@@ -1,6 +1,6 @@
 ---
-- name: '[Debian] Include all Debian-specific variables'
-  include_vars: Debian.yml
+- name: '[Debian] Import all Debian-specific variables'
+  import_vars: Debian.yml
   tags: mpd
 
 # To do something only if some distro installed on the host
