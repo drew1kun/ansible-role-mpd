@@ -1,6 +1,6 @@
 ---
-- name: '[Debian] Import all Debian-specific variables'
-  import_vars: Debian.yml
+- name: '[debian] Include all Debian-specific variables'
+  include_vars: debian.yml
   tags: mpd
 
 # To do something only if some distro installed on the host
@@ -9,16 +9,16 @@
 # example:
 #     when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 #
-# ansible_distribuion: ['MacOSX', 'Debian', 'Ubuntu', 'CentOS', 'Red Hat Enterprise Linux', 'Windows 10']
-# ansible_os_family: ['Darwin', 'Debian', 'Debian' 'RedHat', 'RedHat' 'Windows']
+# ansible_distribuion: ['MacOSX', 'debian', 'Ubuntu', 'CentOS', 'Red Hat Enterprise Linux', 'Windows 10']
+# ansible_os_family: ['Darwin', 'debian', 'Debian' 'RedHat', 'RedHat' 'Windows']
 #
-- name: '[Debian] Install mpd package'
+- name: '[debian] Install mpd package'
   action: >
     {{ ansible_pkg_mgr }} name=mpd state=latest update_cache=yes
   become: yes
   tags: mpd
 
-- name: '[Debian] Install mpc package'
+- name: '[debian] Install mpc package'
   action: >
     {{ ansible_pkg_mgr }} name=mpc state=latest update_cache=yes
   become: yes
@@ -27,7 +27,7 @@
   - mpd
   - mpc
 
-- name: '[Debian] Install ncmpcpp package'
+- name: '[debian] Install ncmpcpp package'
   action: >
     {{ ansible_pkg_mgr }} name=ncmpcpp state=latest update_cache=yes
   become: yes
@@ -36,7 +36,7 @@
   - mpd
   - ncmpcpp
 
-- name: '[Debian] Enable and Start mpd service if needed'
+- name: '[debian] Enable and Start mpd service if needed'
   service:
     name: mpd
     enabled: "{{ mpd_autostart }}"
@@ -44,7 +44,7 @@
   become: yes
   tags: mpd
 
-- name: '[Debian] Enable mpd socket if needed'
+- name: '[debian] Enable mpd socket if needed'
   service:
     name: mpd.socket
     enabled: "{% if mpd_autostart %}no{% else %}yes{% endif %}"
@@ -52,13 +52,13 @@
   become: yes
   tags: mpd
 
-- name: '[Debian] Generate mpd.conf from template'
+- name: '[debian] Generate mpd.conf from template'
   template: src=mpd.conf.j2 dest=/etc/mpd.conf backup=yes owner=root group=root mode=0644
   notify: Restart mpd service
   become: yes
   tags: mpd
 
-- name: '[Debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
+- name: '[debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
   file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="{{ item }}" mode=0755
   become: yes
   become_user: "{{ item }}"
@@ -71,7 +71,7 @@
   - mpd
   - ncmpcpp
 
-- name: '[Debian] Generate ncmpcpp config from template'
+- name: '[debian] Generate ncmpcpp config from template'
   template: src=ncmpcpp.conf.j2 dest='~/.ncmpcpp/config' owner="{{ item }}" group="{{ item }}" mode=0644
   become: yes
   become_user: "{{ item }}"
@@ -92,7 +92,7 @@
   register: mpd_stat_2_firewalld
   tags: mpd
 
-- name: '[Debian] Open mpd port in firewall'
+- name: '[debian] Open mpd port in firewall'
   firewalld: port="{{ mpd_port }}/tcp" zone="{{ item }}" permanent=true immediate=yes state=enabled
   with_items: "{{ mpd_firewall_zones }}"
   become: yes

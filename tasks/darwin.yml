@@ -1,9 +1,9 @@
 ---
-- name: '[Darwin] Import OSX-Specific variables'
-  import_vars: Darwin.yml
+- name: '[darwin] Include OSX-Specific variables'
+  include_vars: darwin.yml
   tags: mpd
 
-- name: '[Darwin] Install mpd with Homebrew'
+- name: '[darwin] Install mpd with Homebrew'
   homebrew:
     update_homebrew: yes
     name: mpd
@@ -11,14 +11,14 @@
     install_options: "{{ mpd_osx_install_options }}"
   tags: mpd
 
-- name: '[Darwin] Install mpc with Homebrew'
+- name: '[darwin] Install mpc with Homebrew'
   homebrew: name=mpc state=latest
   when: mpd_install_mpc
   tags:
   - mpd
   - mpc
 
-- name: '[Darwin] Install ncmpcpp with Homebrew'
+- name: '[darwin] Install ncmpcpp with Homebrew'
   homebrew: name=ncmpcpp state=latest install_options={{ mpd_osx_ncmpcpp_install_options }}
   when: mpd_install_ncmpcpp
   tags:
@@ -29,14 +29,14 @@
   register: mpd_stat_plist
   tags: mpd
 
-- name: '[Darwin] Enable mpd service to start on login'
+- name: '[darwin] Enable mpd service to start on login'
   command: /usr/local/bin/brew services start mpd
   when:
   - mpd_autostart
   - not mpd_stat_plist.stat.exists
   tags: mpd
 
-- name: '[Darwin] Create ~/.mpd/ directory'
+- name: '[darwin] Create ~/.mpd/ directory'
   file:
     path: ~/.mpd
     state: directory
@@ -46,7 +46,7 @@
   become: no
   tags: mpd
 
-- name: '[Darwin] Generate mpd.conf from template'
+- name: '[darwin] Generate mpd.conf from template'
   template:
     src: mpd.conf.j2
     dest: ~/.mpd/mpd.conf
@@ -58,7 +58,7 @@
   notify: Restart mpd service with brew services command
   tags: mpd
 
-- name: '[Debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
+- name: '[debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
   file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="staff" mode=0755
   #file: path='~/.ncmpcpp' state=directory owner="{{ ansible_user_id }}" group="staff" mode=0755
   become: yes
@@ -72,7 +72,7 @@
   - mpd
   - ncmpcpp
 
-- name: '[Debian] Generate ncmpcpp config from template'
+- name: '[debian] Generate ncmpcpp config from template'
   template: src=ncmpcpp.conf.j2 dest='~/.ncmpcpp/config' owner="{{ item }}" group="staff" mode=0644
   become: yes
   become_user: "{{ item }}"

@@ -2,7 +2,7 @@
 # tasks file for mpd
 
 - name: "[main] Include {{ ansible_os_family }}-specific tasks"
-  include_tasks: "{{ ansible_os_family }}.yml"
+  include_tasks: "{{ ansible_os_family | lower }}.yml"
   tags:
   - mpd
   - mpc
