@@ -9,18 +9,18 @@
 # example:
 #     when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
 #
-# ansible_distribuion: ['MacOSX', 'debian', 'Ubuntu', 'CentOS', 'Red Hat Enterprise Linux', 'Windows 10']
-# ansible_os_family: ['Darwin', 'debian', 'Debian' 'RedHat', 'RedHat' 'Windows']
+# ansible_distribuion:  ['MacOSX', 'Debian', 'Ubuntu', 'CentOS', 'Red Hat Enterprise Linux',  'Windows 10']
+# ansible_os_family:    ['Darwin', 'Debian', 'Debian', 'RedHat', 'RedHat',                    'Windows']
 #
 - name: '[debian] Install mpd package'
   action: >
-    {{ ansible_pkg_mgr }} name=mpd state=latest update_cache=yes
+    {{ ansible_pkg_mgr }} name=mpd state=present update_cache=yes
   become: yes
   tags: mpd
 
 - name: '[debian] Install mpc package'
   action: >
-    {{ ansible_pkg_mgr }} name=mpc state=latest update_cache=yes
+    {{ ansible_pkg_mgr }} name=mpc state=present update_cache=yes
   become: yes
   when: mpd_install_mpc
   tags:
@@ -29,7 +29,7 @@
 
 - name: '[debian] Install ncmpcpp package'
   action: >
-    {{ ansible_pkg_mgr }} name=ncmpcpp state=latest update_cache=yes
+    {{ ansible_pkg_mgr }} name=ncmpcpp state=present update_cache=yes
   become: yes
   when: mpd_install_ncmpcpp
   tags:
@@ -59,9 +59,8 @@
   tags: mpd
 
 - name: '[debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
-  file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="{{ item }}" mode=0755
+  file: path="/home/{{ item }}/.ncmpcpp" state=directory owner="{{ item }}" group="{{ item }}" mode=0755
   become: yes
-  become_user: "{{ item }}"
   with_items: "{{ mpd_ncmpcpp_users }}"
   when:
   - mpd_install_ncmpcpp
@@ -72,9 +71,8 @@
   - ncmpcpp
 
 - name: '[debian] Generate ncmpcpp config from template'
-  template: src=ncmpcpp.conf.j2 dest='~/.ncmpcpp/config' owner="{{ item }}" group="{{ item }}" mode=0644
+  template: src=ncmpcpp.conf.j2 dest="/home/{{ item }}/.ncmpcpp/config" owner="{{ item }}" group="{{ item }}" mode=0644
   become: yes
-  become_user: "{{ item }}"
   with_items: "{{ mpd_ncmpcpp_users }}"
   when:
   - mpd_install_ncmpcpp
@@ -84,18 +82,23 @@
   - mpd
   - ncmpcpp
 
-- stat: path=/usr/sbin/firewalld
-  register: mpd_stat_1_firewalld
-  tags: mpd
-
-- stat: path=/sbin/firewalld
-  register: mpd_stat_2_firewalld
+- name: '[debian] Check firewalld stats'
+  stat: path="{{ item }}"
+  register: mpd_stat_firewalld
+  become: yes
+  with_items:
+  - /usr/sbin/firewalld
+  - /sbin/firewalld
   tags: mpd
 
 - name: '[debian] Open mpd port in firewall'
   firewalld: port="{{ mpd_port }}/tcp" zone="{{ item }}" permanent=true immediate=yes state=enabled
   with_items: "{{ mpd_firewall_zones }}"
   become: yes
-  when: mpd_stat_1_firewalld.stat.exists or mpd_stat_2_firewalld.stat.exists
+  when: mpd_stat_firewalld.results[0].stat.exists
+        or
+        mpd_stat_firewalld.results[1].stat.exists
+  vars:
+    ansible_python_interpreter: '/usr/bin/python3' # Fix the "Python Module not found.." Error
   tags: mpd
 ...

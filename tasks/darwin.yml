@@ -7,18 +7,18 @@
   homebrew:
     update_homebrew: yes
     name: mpd
-    state: latest
+    state: present
   tags: mpd
 
 - name: '[darwin] Install mpc with Homebrew'
-  homebrew: name=mpc state=latest
+  homebrew: name=mpc state=present
   when: mpd_install_mpc
   tags:
   - mpd
   - mpc
 
 - name: '[darwin] Install ncmpcpp with Homebrew'
-  homebrew: name=ncmpcpp state=latest
+  homebrew: name=ncmpcpp state=present
   when: mpd_install_ncmpcpp
   tags:
   - mpd
