@@ -60,7 +60,6 @@
 
 - name: '[debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
   file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="staff" mode=0755
-  #file: path='~/.ncmpcpp' state=directory owner="{{ ansible_user_id }}" group="staff" mode=0755
   become: yes
   become_user: "{{ item }}"
   with_items: "{{ mpd_ncmpcpp_users }}"
