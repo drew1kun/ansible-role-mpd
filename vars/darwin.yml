@@ -1,32 +1,4 @@
 ---
-#========================== INSTALL RELATED ============================
-#mpd_osx_install_options:
-#  - '--with-flac'         # for Flac encoding when streaming
-#  - '--with-jack'
-#  - '--with-lame'         # for MP3 encoding when streaming
-#  - '--with-lastfm'       # for experimental Last.fm radio
-#  - '--with-libao'
-#  - '--with-libmms'
-#  - '--with-libmodplug'   # for decoding modules supported by MODPlug
-#  - '--with-libnfs'       # for NFS share support
-#  - '--with-libshout'
-#  - '--with-libvorbis'    # for Ogg encoding
-#  - '--with-libzzip'
-#  - '--with-libmad'
-#  - '--with-opus'         # for Opus encoding and decoding
-#  - '--with-mad'
-#  - '--with-pulseaudio'   # for sending audio output to a PulseAudio sound server
-#  - '--with-two-lame'     # for MP2 encoding when streaming
-#  - '--with-upnp'
-#  - '--with-wavpack'      # for .wv files
-#  - '--with-yajl'         # for playing from soundcloud
-#
-#mpd_osx_ncmpcpp_install_options:
-#  - '--with-outputs'
-#  - '--with-clock'
-#  - '--with-visualizer'
-#=======================================================================
-
 #=========================== CONFIG RELATED ============================
 # music directory can also be nfs share if mpd built --with-libnfs
 #   mpd_music_dir: nfs://192.168.1.1/music
