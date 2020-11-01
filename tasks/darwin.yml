@@ -8,7 +8,6 @@
     update_homebrew: yes
     name: mpd
     state: latest
-    install_options: "{{ mpd_osx_install_options }}"
   tags: mpd
 
 - name: '[darwin] Install mpc with Homebrew'
@@ -19,7 +18,7 @@
   - mpc
 
 - name: '[darwin] Install ncmpcpp with Homebrew'
-  homebrew: name=ncmpcpp state=latest install_options={{ mpd_osx_ncmpcpp_install_options }}
+  homebrew: name=ncmpcpp state=latest
   when: mpd_install_ncmpcpp
   tags:
   - mpd
