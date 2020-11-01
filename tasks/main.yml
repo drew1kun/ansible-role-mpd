@@ -8,6 +8,7 @@
   - mpc
   - ncmpcpp
 
-- meta: flush_handlers
+- name: "[main] Flush all handlers"
+  meta: flush_handlers
   tags: mpd
 ...

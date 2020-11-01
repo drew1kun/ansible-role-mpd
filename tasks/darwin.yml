@@ -24,7 +24,8 @@
   - mpd
   - ncmpcpp
 
-- stat: path=~/Library/LaunchAgents/homebrew.mxcl.mpd.plist
+- name: '[darwin] Check if ~/Library/LaunchAgents/homebrew.mxcl.mpd.plist exists'
+  stat: path=~/Library/LaunchAgents/homebrew.mxcl.mpd.plist
   register: mpd_stat_plist
   tags: mpd
 
