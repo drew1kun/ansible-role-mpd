@@ -4,7 +4,7 @@
   tags: mpd
 
 - name: '[darwin] Install mpd with Homebrew'
-  homebrew: update_homebrew=yes name=mpd state=present
+  homebrew: name=mpd state=present
   tags: mpd
 
 - name: '[darwin] Install mpc with Homebrew'
