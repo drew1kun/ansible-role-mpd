@@ -58,26 +58,36 @@
   become: yes
   tags: mpd
 
-- name: '[debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
-  file: path="/home/{{ item }}/.ncmpcpp" state=directory owner="{{ item }}" group="{{ item }}" mode=0755
+- name: '[debian] Create ~/.ncmpcpp folder for each mpd_user'
+  file:
+    path: "{{ '' if item=='root' else '/home' }}/{{ item }}/.ncmpcpp"
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0755
   become: yes
-  with_items: "{{ mpd_ncmpcpp_users }}"
+  with_items: "{{ mpd_users }}"
   when:
   - mpd_install_ncmpcpp
-  - mpd_ncmpcpp_users is defined
-  - mpd_ncmpcpp_users | length > 0
+  - mpd_users is defined
+  - mpd_users | length > 0
   tags:
   - mpd
   - ncmpcpp
 
-- name: '[debian] Generate ncmpcpp config from template'
-  template: src=ncmpcpp.conf.j2 dest="/home/{{ item }}/.ncmpcpp/config" owner="{{ item }}" group="{{ item }}" mode=0644
+- name: '[debian] Generate ncmpcpp config from template for each mpd_user'
+  template:
+    src: ncmpcpp.conf.j2
+    dest: "{{ '' if item=='root' else '/home' }}/{{ item }}/.ncmpcpp/config"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0644
   become: yes
-  with_items: "{{ mpd_ncmpcpp_users }}"
+  with_items: "{{ mpd_users }}"
   when:
   - mpd_install_ncmpcpp
-  - mpd_ncmpcpp_users is defined
-  - mpd_ncmpcpp_users | length > 0
+  - mpd_users is defined
+  - mpd_users | length > 0
   tags:
   - mpd
   - ncmpcpp

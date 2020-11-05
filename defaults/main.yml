@@ -1,11 +1,11 @@
 ---
 # defaults file for mpd
 
-mpd_autostart: true
+mpd_autostart: yes
 
-mpd_install_mpc: true
+mpd_install_mpc: yes
 
-mpd_install_ncmpcpp: true
+mpd_install_ncmpcpp: yes
 
 mpd_ncmpcpp_mpd_host: localhost
 
@@ -23,8 +23,7 @@ mpd_follow_inside_symlinks: yes
 mpd_follow_outside_symlinks: no
 #=======================================================================
 
-# Linux only:
-mpd_ncmpcpp_users:
-  - drew
-  - root
+mpd_users:
+- "{{ ansible_user_id }}"
+- root
 ...

@@ -4,10 +4,7 @@
   tags: mpd
 
 - name: '[darwin] Install mpd with Homebrew'
-  homebrew:
-    update_homebrew: yes
-    name: mpd
-    state: present
+  homebrew: update_homebrew=yes name=mpd state=present
   tags: mpd
 
 - name: '[darwin] Install mpc with Homebrew'
@@ -36,33 +33,39 @@
   - not mpd_stat_plist.stat.exists
   tags: mpd
 
-- name: '[darwin] Create ~/.mpd/ directory'
+- name: '[darwin] Create ~/.mpd/ directory for each mpd_user'
   file:
-    path: ~/.mpd
+    path: "/{{ 'var' if item=='root' else 'Users' }}/{{ item }}/.mpd"
     state: directory
-    owner: "{{ ansible_user_id }}"  # Works only if gathering facts. Turns to root if using 'become: yes'
+    owner: "{{ item }}"  # Works only if gathering facts. Turns to root if using 'become: yes'
     group: staff
     mode: 0755
-  become: no
+  become: yes
+  with_items: "{{ mpd_users }}"
   tags: mpd
 
-- name: '[darwin] Generate mpd.conf from template'
+- name: '[darwin] Generate mpd.conf from template for each mpd_user'
   template:
     src: mpd.conf.j2
-    dest: ~/.mpd/mpd.conf
+    dest: "/{{ 'var' if item=='root' else 'Users' }}/{{ item }}/.mpd/mpd.conf"
     backup: yes
-    owner: "{{ ansible_user_id }}"
+    owner: "{{ item }}"
     group: staff
     mode: 0644
-  become: no
+  become: yes
+  with_items: "{{ mpd_users }}"
   notify: Restart mpd service with brew services command
   tags: mpd
 
-- name: '[debian] Create ~/.ncmpcpp folder for each mpd_ncmpcpp_user'
-  file: path='~/.ncmpcpp' state=directory owner="{{ item }}" group="staff" mode=0755
+- name: '[darwin] Create ~/.ncmpcpp folder for each mpd_user'
+  file:
+    path: "/{{ 'var' if item=='root' else 'Users' }}/{{ item }}/.ncmpcpp"
+    state: directory
+    owner: "{{ item }}"
+    group: "staff"
+    mode: 0755
   become: yes
-  become_user: "{{ item }}"
-  with_items: "{{ mpd_ncmpcpp_users }}"
+  with_items: "{{ mpd_users }}"
   when:
   - mpd_install_ncmpcpp
   - mpd_ncmpcpp_users is defined
@@ -71,11 +74,15 @@
   - mpd
   - ncmpcpp
 
-- name: '[debian] Generate ncmpcpp config from template'
-  template: src=ncmpcpp.conf.j2 dest='~/.ncmpcpp/config' owner="{{ item }}" group="staff" mode=0644
+- name: '[darwin] Generate ncmpcpp config from template for each mpd_user'
+  template:
+    src: ncmpcpp.conf.j2
+    dest: "/{{ 'var' if item=='root' else 'Users' }}/{{ item }}/.ncmpcpp/config"
+    owner: "{{ item }}"
+    group: "staff"
+    mode: 0644
   become: yes
-  become_user: "{{ item }}"
-  with_items: "{{ mpd_ncmpcpp_users }}"
+  with_items: "{{ mpd_users }}"
   when:
   - mpd_install_ncmpcpp
   - mpd_ncmpcpp_users is defined
