@@ -68,8 +68,8 @@
   with_items: "{{ mpd_users }}"
   when:
   - mpd_install_ncmpcpp
-  - mpd_ncmpcpp_users is defined
-  - mpd_ncmpcpp_users | length > 0
+  - mpd_users is defined
+  - mpd_users | length > 0
   tags:
   - mpd
   - ncmpcpp
@@ -85,8 +85,8 @@
   with_items: "{{ mpd_users }}"
   when:
   - mpd_install_ncmpcpp
-  - mpd_ncmpcpp_users is defined
-  - mpd_ncmpcpp_users | length > 0
+  - mpd_users is defined
+  - mpd_users | length > 0
   tags:
   - mpd
   - ncmpcpp
