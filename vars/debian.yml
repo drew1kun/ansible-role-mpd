@@ -18,19 +18,19 @@ mpd_user: mpd
 
 mpd_outputs:
 # NO OUTPUT
-  - name: "Null Output"
-    type: "null"
+- name: "Null Output"
+  type: "null"
 
 # ALSA DRIVER
 # Install driver:
 #   apt-get install alsa-utils
-  - name: "My ALSA Device"
-    type: "alsa"
-    device: "hw:0,0"            # optional
-    format: "44100:16:2"        # optional
-    mixer_device: "default"     # optional
-    mixer_control: "PCM"        # optional
-    mixer_index: "0"            # optional
+- name: "My ALSA Device"
+  type: "alsa"
+  device: "hw:0,0"            # optional
+  format: "44100:16:2"        # optional
+  mixer_device: "default"     # optional
+  mixer_control: "PCM"        # optional
+  mixer_index: "0"            # optional
 
 # PULSEAUDIO DRIVER
 # Does not work well on Raspberry Pi 3 for some reason
@@ -52,12 +52,12 @@ mpd_outputs:
 
 # HTTP STREAM
 # Install codec: apt-get install lame
-  - name: "My HTTP Stream"
-    type: "httpd"
-    encoder: "lame"
-    port: "8000"
-    quality: "5.0"    # IMPORTANT: Specify EITHER 'quality' OR 'bitrate' - NEVER both!
-    # bitrate: "128"
-    format: "44100:16:1"
+- name: "My HTTP Stream"
+  type: "httpd"
+  encoder: "lame"
+  port: "8000"
+  quality: "5.0"    # IMPORTANT: Specify EITHER 'quality' OR 'bitrate' - NEVER both!
+  # bitrate: "128"
+  format: "44100:16:1"
 #=======================================================================
 ...
