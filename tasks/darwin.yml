@@ -27,7 +27,7 @@
   tags: mpd
 
 - name: '[darwin] Enable mpd service to start on login'
-  command: /usr/local/bin/brew services start mpd
+  command: /opt/homebrew/bin/brew services start mpd
   when:
   - mpd_autostart
   - not mpd_stat_plist.stat.exists
