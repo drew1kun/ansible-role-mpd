@@ -3,6 +3,14 @@
   include_vars: darwin.yml
   tags: mpd
 
+- name: '[main] Determine brew prefix'
+  command: 'brew --prefix'
+  environment:
+    PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
+  register: mpd_brew_prefix
+  changed_when: false
+  tags: mpd
+
 - name: '[darwin] Install mpd with Homebrew'
   homebrew: name=mpd state=present
   tags: mpd
@@ -27,7 +35,7 @@
   tags: mpd
 
 - name: '[darwin] Enable mpd service to start on login'
-  command: /opt/homebrew/bin/brew services start mpd
+  command: "{{ mpd_brew_prefix.stdout }}/bin/brew services start mpd"
   when:
   - mpd_autostart
   - not mpd_stat_plist.stat.exists

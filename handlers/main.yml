@@ -14,7 +14,7 @@
 ### MACOS
 # Brew services:
 - name: Restart mpd service with brew services command
-  command: /opt/homebrew/bin/brew services restart mpd
+  command: "{{ mpd_brew_prefix.stdout }}/bin/brew services restart mpd"
   when: mpd_autostart
   become: no
 ...
