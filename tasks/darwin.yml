@@ -3,7 +3,7 @@
   include_vars: darwin.yml
   tags: mpd
 
-- name: '[main] Determine brew prefix'
+- name: '[darwin] Determine brew prefix'
   command: 'brew --prefix'
   environment:
     PATH: "/opt/homebrew/bin:/usr/local/bin:{{ ansible_env.PATH }}"
