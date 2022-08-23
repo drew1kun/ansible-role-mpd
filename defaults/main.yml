@@ -26,4 +26,4 @@ mpd_follow_outside_symlinks: no
 mpd_users:
 - "{{ ansible_user_id }}"
 - root
-...
+
