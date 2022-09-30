@@ -3,7 +3,16 @@
 [![MIT licensed][mit-badge]][mit-link]
 [![Galaxy Role][role-badge]][galaxy-link]
 
-Cross-platform ansible role for installation and configuration of MPD, MPC and NCMPCPP on MacOS and Linux Systems
+DEPRECATION NOTICE
+----
+This role is being deprecated in favor of [ansible-collection-slickshell][slickshell-github-link].
+
+Collection on Galaxy: [drew1kun.slickshell][slickshell-galaxy-link]
+
+Description
+----
+
+Cross-platform ansible role for installation and configuration of MPD, MPC and NCMPCPP on MacOS and Linux Systems.
 
 Requirements
 ----
@@ -116,3 +125,5 @@ Andrew Shagayev | [e-mail](mailto:drewshg@gmail.com)
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [mit-link]: https://raw.githubusercontent.com/drew1kun/ansible-mpd/master/LICENSE
 [homebrew]: http://brew.sh/
+[slickshell-github-link]:https://github.com/drew1kun/ansible-collection-slickshell
+[slickshell-galaxy-link]:https://galaxy.ansible.com/drew1kun/slickshell
